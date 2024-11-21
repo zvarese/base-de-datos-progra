@@ -25,7 +25,6 @@ public class MateriaController {
     public MateriaController(MateriaRepository materiaRepository) {
         this.materiaRepository = materiaRepository;
     }
-    // method implementations with walkthroughs below
 
     @PutMapping
     Mono<MateriaEntity> createOrUpdateMovie(@RequestBody MateriaEntity newMovie) {
@@ -41,35 +40,35 @@ public class MateriaController {
     public Mono<MateriaEntity> getMateriaWithRelations(@PathVariable String title) {
         return materiaRepository.findById(title)
                 .switchIfEmpty(Mono.error(new RuntimeException("Materia no encontrada")));
-    }
+    }    
 
     @GetMapping("/grafo")
     public Mono<String> getGrafo() {
         return materiaRepository.findAll()
-                .collectList() // Convertimos el Flux a un Mono<List<MovieEntity>>
+                .collectList()
                 .map(materias -> {
-                    Grafo grafo = new Grafo(materias); // Construimos el grafo con la lista de películas
-                    return grafo.toString(); // Devolvemos la representación en String del grafo
+                    Grafo grafo = new Grafo(materias);
+                    return grafo.toString();
                 });
     }
 
     @GetMapping("/bfs")
     public Mono<String> getBFS() {
         return materiaRepository.findAll()
-                .collectList() // Convertimos el Flux a un Mono<List<MovieEntity>>
+                .collectList() 
                 .map(materias -> {
-                    Grafo grafo = new Grafo(materias); // Construimos el grafo con la lista de películas
-                    return grafo.BFS(materias.get(0)); // Devolvemos la representación en String del grafo
+                    Grafo grafo = new Grafo(materias); 
+                    return grafo.BFS(materias.get(0)); 
                 });
     }
 
     @GetMapping("/dfs")
     public Mono<String> getDFS() {
         return materiaRepository.findAll()
-                .collectList() // Convertimos el Flux a un Mono<List<MovieEntity>>
+                .collectList() 
                 .map(materias -> {
-                    Grafo grafo = new Grafo(materias); // Construimos el grafo con la lista de películas
-                    return grafo.DFS(materias.get(0)); // Devolvemos la representación en String del grafo
+                    Grafo grafo = new Grafo(materias); 
+                    return grafo.DFS(materias.get(0)); 
                 });
     }
 }

@@ -19,9 +19,6 @@ import static org.springframework.data.neo4j.core.schema.Relationship.Direction.
 public class MateriaEntity {
     @Id
     private final String title;
-    
-    @Property
-    private final String tagline;
 
     @Relationship(type = "Estudia", direction = INCOMING)
     private Set<PersonEntity> estudiantes = new HashSet<>();
@@ -29,17 +26,12 @@ public class MateriaEntity {
     @Relationship(type = "Ensenia", direction = INCOMING)
     private Set<PersonEntity> enseniadores = new HashSet<>();
 
-    public MateriaEntity(String tagline, String title) {
-            this.tagline = tagline;
-            this.title = title;
-        }
+    public MateriaEntity(String title) {
+        this.title = title;
+    }
 
     public String getTitle() {
         return title;
-    }
-
-    public String getTagline() {
-        return tagline;
     }
 
     public Set<PersonEntity> getEstudiantes(){
