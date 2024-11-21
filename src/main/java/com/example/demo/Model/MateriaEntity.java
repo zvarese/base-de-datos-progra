@@ -7,6 +7,12 @@ import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
 import org.springframework.data.neo4j.core.schema.Relationship;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.example.demo.Grafo;
+
+import reactor.core.publisher.Mono;
+
 import static org.springframework.data.neo4j.core.schema.Relationship.Direction.INCOMING;
 
 @Node("Materia")
@@ -21,7 +27,7 @@ public class MateriaEntity {
     private Set<PersonEntity> estudiantes = new HashSet<>();
 
     @Relationship(type = "Ensenia", direction = INCOMING)
-    private Set<PersonEntity> enseniador = new HashSet<>();
+    private Set<PersonEntity> enseniadores = new HashSet<>();
 
     public MateriaEntity(String tagline, String title) {
             this.tagline = tagline;
@@ -36,5 +42,11 @@ public class MateriaEntity {
         return tagline;
     }
 
-    
+    public Set<PersonEntity> getEstudiantes(){
+        return estudiantes;
+    }
+
+    public Set<PersonEntity> getEnseniadores(){
+        return enseniadores;
+    }            
 }

@@ -7,9 +7,9 @@ import org.springframework.data.neo4j.core.schema.Node;
 public class PersonEntity {
     @Id
     private final String name;
-    private final Integer born;
+    private final String born;
 
-    public PersonEntity(Integer born, String name) {
+    public PersonEntity(String born, String name) {
         this.born = born;
         this.name = name;
     }
@@ -18,7 +18,7 @@ public class PersonEntity {
         return name;
     }
 
-    public Integer getBorn() {
+    public String getBorn() {
         return born;
     }
 }
